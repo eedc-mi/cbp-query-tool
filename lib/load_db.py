@@ -83,13 +83,14 @@ def clean_naics_df(df):
     df.columns = ['naics_id', 'description']
     return df
 
-if __name__ == '__main__':
-    path = 'V:\Economic Intelligence\Data & Forecasts for MI\CBP Query Tool\data'
-    cbp_path = path + '/counts'
-    naics_path = path + '/naics'
-    geo_path = path + '/geo'
+def main(data_path, db_path):
+    #path = 'V:\Economic Intelligence\Data & Forecasts for MI\CBP Query Tool\data'
+    cbp_path = data_path + '/counts'
+    naics_path = data_path + '/naics'
+    geo_path = data_path + '/geo'
 
-    engine = setup_db('V:\Economic Intelligence\Data & Forecasts for MI\CBP Query Tool\code\cbp_query_tool\lib/data.db')
+    #'V:\Economic Intelligence\Data & Forecasts for MI\CBP Query Tool\code\cbp_query_tool\lib/data.db'
+    engine = setup_db(db_path)
     chunksize = 20000
 
     print 'Loading naics table...'
@@ -102,6 +103,12 @@ if __name__ == '__main__':
     load_db(cbp_path, chunksize, engine, 'counts', clean_cbp_df)
 
     print 'Finished.'
+
+if __name__ == '__main__':
+    data_path = 'V:\Economic Intelligence\Data & Forecasts for MI\CBP Query Tool\data'
+    os.chdir('..')
+    db_path = os.getcwd() + '\data'
+    main(data_path, db_path)
 
 
     

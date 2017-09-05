@@ -1,5 +1,17 @@
 from cx_Freeze import setup, Executable
 import sys
+import os
+
+import lib.load_db as load_db
+
+if not os.path.isfile("data\data.db"):
+    print 'Database not found. Building database from raw files...'
+    data_path = raw_input('Please provide the path to the raw data folder:')
+
+    os.chdir('..')
+    db_path = os.getcwd() + '\data' 
+
+    load_db.main(data_path, db_path)                
 
 build_options = {
     'packages' : ['sqlalchemy.dialects.sqlite'],
