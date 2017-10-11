@@ -5,10 +5,10 @@ from query import Query
 engine = sql.create_engine('sqlite:///V:\Economic Intelligence\Data & Forecasts for MI\CBP Query Tool\June 2016\code\cbp_query_tool\data\data.db')
 query = Query(engine)
 
-query.set_target_geo_level('CMA_CA')
-query.set_parent_geo_level('Province')
+query.set_target_geo_level('CSD')
+query.set_parent_geo_level('CSD')
 query.set_naics_level(2)
-query.set_parent_geo('Quebec')
+query.set_parent_geo('Edmonton')
 
 print query.build_query()
 query.get_df()

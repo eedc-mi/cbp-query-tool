@@ -100,7 +100,6 @@ class Query(object):
             self.df = pd.DataFrame()
 
     def process_response(self, df):
-        
         df_naics_col_name = self.naics_id_column_name + str(self.naics_level)
         
         df[df_naics_col_name].replace(0, 1, inplace=True)
@@ -111,7 +110,8 @@ class Query(object):
         total_df[self.naics_desc_column_name] = "Total"
 
         sub_total_df = df[
-                df[df_naics_col_name] != 0
+                (df[df_naics_col_name] != 0) &
+                (df[df_naics_col_name] != 1)
             ].groupby(self.target_geo_level).sum()
         sub_total_df[df_naics_col_name] = 2
         sub_total_df[self.naics_desc_column_name] = "Sub-total, classified"
