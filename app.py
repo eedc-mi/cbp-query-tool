@@ -92,8 +92,6 @@ class RunQueryThread(QThread):
             self.emit(SIGNAL('query_done(QString)'), string)
             stopped = True
 
-            #TODO: fix when parent geo is wrong
-
         if not stopped:
             nrows = self.query.df.shape[0]
             if nrows == 0: 
